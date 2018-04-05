@@ -1,0 +1,99 @@
+{% extends 'templates/myapp/header.html' %}
+
+{% block content %}
+
+<style type="text/css">
+
+.ct-series-b .ct-slice-donut-solid {
+  /* give the donut slice a custom colour */
+  fill: green !important;
+  /* customize stroke width of the donut slices in CSS. Note that this property is already set in JavaScript and label positioning also relies on this. In the right situation though it can be very useful to style this property. You need to use !important to override the style attribute */
+  stroke-width: 5px !important;
+  /* create modern looking rounded donut charts */
+  stroke-linecap: round;
+}
+
+  .ct-series-a .ct-line,
+.ct-series-a .ct-point {
+  stroke: red;
+}
+
+.ct-series-b .ct-line,
+.ct-series-b .ct-point {
+  stroke: green;
+}
+</style>
+    <div class="container paddingTop100">
+
+        <h3><i class="fa fa-twitter text-primary"></i> Saved Tweets</h3>
+        <hr>
+    <div class="row">
+
+    <div class="col">
+        <div class="card bg-light mb-3" style="">
+  <div class="card-header"><h4><b>Positive</b></h4></div>
+  <div class="card-body">
+                   {% for item in tweets %}
+                    {% if item.tw_cat > 0 %}
+                            <!--Card content-->
+                            <div class="card-block">
+                                <h4 class="card-title">@{{ item.tw_user }}:</h4>
+                                <hr>
+                                <h5 class="card-text">{{ item.tw_text }}</h5>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+  </div>
+</div>
+    </div>
+    <div class="col">
+<div class="card bg-light mb-3" style="">
+  <div class="card-header"><h4><b>Negative</b></h4></div>
+  <div class="card-body">
+     {% for item in tweets %}
+                    {% if item.tw_cat < 0 %}
+                            <!--Card content-->
+                            <div class="card-block">
+                                <h4 class="card-title">@{{ item.tw_user }}:</h4>
+                                <hr>
+                                <h5 class="card-text">{{ item.tw_text }}</h5>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+  </div>
+</div>
+    </div>
+        <div class="col">
+<div class="card bg-light mb-3" style="">
+  <div class="card-header"><h4><b>Neutral</b></h4></div>
+  <div class="card-body">
+     {% for item in tweets %}
+                    {% if item.tw_cat == 0 %}
+                            <!--Card content-->
+                            <div class="card-block">
+                                <h4 class="card-title">@{{ item.tw_user }}:</h4>
+                                <hr>
+                                <h5 class="card-text">{{ item.tw_text }}</h5>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+  </div>
+</div>
+    </div>
+</div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
